@@ -47,12 +47,22 @@ class ViewController: UIViewController {
     
     let myTextLabel: UILabel = {
         let label = UILabel()
-        label.text = "''Литература — это волшебное убежище, где мы можем отстраниться от суеты и проблем повседневной жизни. Она приглашает нас в параллельные миры, где можно погрузиться в приключения и романтику, забыв о реальности. Книги позволяют нам скользить по страницам, словно по магическому ковру, и наслаждаться прекрасными историями, созданными умами талантливых авторов. В этом пространстве мы можем познать героев, их страсти и стремления, воспроизвести их радости и печали, не покидая уютное кресло. Литература — это близкий друг, который позволяет нам временно уйти от реальности и насладиться миром фантазии.'"
+        label.text = "''Литература — это волшебное убежище, где мы можем отстраниться от суеты и проблем повседневной жизни. Она приглашает нас в параллельные миры, где можно погрузиться в приключения и романтику, забыв о реальности. Книги позволяют нам скользить по страницам, словно по магическому ковру, и наслаждаться прекрасными историями, созданными умами талантливых авторов. В этом пространстве мы можем познать героев, их страсти и стремления, воспроизвести их радости и печали, не покидая уютное кресло. Литература — это близкий друг!''"
         label.numberOfLines = 0
         label.textAlignment = .justified
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let myButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Читать", for: .normal)
+        button.configuration = .filled()
+        button.addTarget(self, action: #selector(myButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+        
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,12 +77,14 @@ private extension ViewController {
         view.addSubview(circleView)
         view.addSubview(myImage)
         view.addSubview(myMainLabel)
+        view.addSubview(myTextLabel)
+        view.addSubview(myButton)
     }
     
     func makeConstraints() {
         NSLayoutConstraint.activate([
             myMainView.widthAnchor.constraint(equalToConstant: 393),
-            myMainView.heightAnchor.constraint(equalToConstant: 310),
+            myMainView.heightAnchor.constraint(equalToConstant: 250),
             myMainView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
         NSLayoutConstraint.activate([
@@ -83,20 +95,35 @@ private extension ViewController {
         ])
         NSLayoutConstraint.activate([
            
-            myImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            myImage.topAnchor.constraint(equalTo: myMainView.bottomAnchor, constant: 75),
+            myImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            myImage.topAnchor.constraint(equalTo: myMainView.bottomAnchor, constant: 25),
             myImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -298),
             myImage.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -373),
             
-            myImage.widthAnchor.constraint(equalToConstant: 70),
-            myImage.heightAnchor.constraint(equalToConstant: 70)
+            myImage.widthAnchor.constraint(equalToConstant: 60),
+            myImage.heightAnchor.constraint(equalToConstant: 60)
         ])
         NSLayoutConstraint.activate([
-            myMainLabel.topAnchor.constraint(equalTo: myMainView.bottomAnchor, constant: 53),
+            myMainLabel.topAnchor.constraint(equalTo: myMainView.bottomAnchor, constant: 2),
             myMainLabel.leadingAnchor.constraint(equalTo: myImage.trailingAnchor, constant: 10),
             myMainLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             myMainLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -350)
         ])
+        NSLayoutConstraint.activate([
+            myTextLabel.topAnchor.constraint(equalTo: myImage.bottomAnchor, constant: 20),
+            myTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            myTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+        ])
+        NSLayoutConstraint.activate([
+            myButton.topAnchor.constraint(equalTo: myTextLabel.bottomAnchor, constant: 20),
+            myButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            myButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+        ])
+    }
+}
+@objc private extension ViewController {
+    func myButtonTapped() {
+        print("Button Tap!")
     }
 }
 
